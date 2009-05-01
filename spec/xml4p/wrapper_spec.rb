@@ -182,7 +182,7 @@ XML
     describe "with namespace" do
       before :each do
         @wrapper = XML4P::Wrapper.new <<-XML
-        <root xmlns='http://www.vonage.com' xmlns:p='http://www.vonage.com/proteus'>
+        <root xmlns='http://www.vonage.com' xmlns:p='http://www.test.com'>
         <p:elem name='elem1' attr='attrvalue1'>1</p:elem>
         <p:elem name='elem2' attr='attrvalue2'>2</p:elem>
         <elem_with_default_ns>value</elem_with_default_ns>
@@ -191,27 +191,27 @@ XML
       end
 
       it "find should return elements with namespace" do
-        @wrapper.find("//p:elem", "p:http://www.vonage.com/proteus").size.should == 2
+        @wrapper.find("//p:elem", "p:http://www.test.com").size.should == 2
       end
 
       it "find should return elements with default namespace" do
-        @wrapper.find("//elem_with_default_ns", "http://www.vonage.com/proteus").size.should == 1
+        @wrapper.find("//elem_with_default_ns", "http://www.test.com").size.should == 1
       end
 
       it "first should return first element with namespace" do
-        @wrapper.first("//p:elem", "p:http://www.vonage.com/proteus").should_not be_nil
+        @wrapper.first("//p:elem", "p:http://www.test.com").should_not be_nil
       end
       
       it "first_with_attribute should return first element with attribute and namespace" do
-        @wrapper.first_with_attribute("//p:elem", 'name', 'elem1', "p:http://www.vonage.com/proteus").should_not be_nil
+        @wrapper.first_with_attribute("//p:elem", 'name', 'elem1', "p:http://www.test.com").should_not be_nil
       end
 
       it "content should return content for first match" do
-        @wrapper.content("//p:elem", "p:http://www.vonage.com/proteus").should == '1'
+        @wrapper.content("//p:elem", "p:http://www.test.com").should == '1'
       end
 
       it "contents should return contents for matches" do
-        @wrapper.contents("//p:elem", "p:http://www.vonage.com/proteus").should == ['1', '2']
+        @wrapper.contents("//p:elem", "p:http://www.test.com").should == ['1', '2']
       end
     end
   end
